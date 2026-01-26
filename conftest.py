@@ -1,0 +1,2 @@
+from fixtures.auth_fixtures import user_context
+from fixtures.authorized_client_fixtures import authorized_user_client

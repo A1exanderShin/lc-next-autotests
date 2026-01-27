@@ -9,5 +9,8 @@ API autotests for backend services.
 
 ## How to run
 ```bash
+.\venv\Scripts\Activate.ps1
+
 pip install -r requirements.txt
+
 pytest

@@ -7,8 +7,8 @@ from fixtures.user_context import UserContext
 def user_context():
     client = AuthClient()
 
-    phone = "79015550101"
-    password = "12345678"
+    phone = "77000000000"
+    password = "00000000"
 
     # 1. check_phone
     check_phone_resp = client.check_phone(phone)

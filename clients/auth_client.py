@@ -9,10 +9,14 @@ class AuthClient(BaseClient):
             json={"phone": phone}
         )
 
-    def login(self, session_id: str, password: str, accept_offer: bool = True):
+    def login(self, session_id: str | None, password: str, accept_offer: bool = True):
         payload = {
-            "session_id": session_id,
             "password": password,
             "accept_offer": accept_offer
         }
+
+        if session_id is not None:
+            payload["session_id"] = session_id
+
         return self.post("/auth/login", json=payload)
+

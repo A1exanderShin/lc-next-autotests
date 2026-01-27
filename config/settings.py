@@ -1,6 +1,8 @@
 import os
 from dataclasses import dataclass
 
+TEST_PHONE = "77000000000"
+TEST_PASSWORD = "00000000"
 
 @dataclass(frozen=True)
 class Settings:

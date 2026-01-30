@@ -1,13 +1,13 @@
 import os
 from dataclasses import dataclass
 
-TEST_PHONE = "77000000000"
-TEST_PASSWORD = "00000000"
+DEFAULT_PASSWORD = "11111111"
 
 @dataclass(frozen=True)
 class Settings:
     base_url: str
     timeout: int = 10
+    default_password: str = DEFAULT_PASSWORD
 
 
 settings = Settings(

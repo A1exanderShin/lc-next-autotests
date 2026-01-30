@@ -20,3 +20,30 @@ class AuthClient(BaseClient):
 
         return self.post("/auth/login", json=payload)
 
+    def check_sms(self, session_id: str, sms_code: int):
+        return self.post(
+            "/auth/check_sms",
+            json={
+                "session_id": session_id,
+                "sms_code": sms_code
+            }
+        )
+
+    def register(self, session_id: str, password: str):
+        return self.post(
+            "/auth/register",
+            json={
+                "session_id": session_id,
+                "password": password
+            }
+        )
+
+    def token_refresh(self, token: str, refresh_token: str):
+        return self.post(
+            "/auth/token_refresh",
+            json={
+                "token": token,
+                "refresh_token": refresh_token
+            }
+        )
+

@@ -1,5 +1,5 @@
 from clients.base.authorized_client import AuthorizedClient
-from fixtures.user_context import UserContext
+from models.user_context import UserContext
 
 
 class AuthorizedUserClient(AuthorizedClient):

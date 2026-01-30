@@ -5,6 +5,11 @@ from config.settings import settings
 class BaseClient:
     def __init__(self):
         self.session = requests.Session()
+        self.session.headers.update({
+            "user-agent": "autotests",
+            "x-language": "ru",
+            "x-app-version": "test"
+        })
         self.base_url = settings.base_url
         self.timeout = settings.timeout
 

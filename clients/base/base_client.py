@@ -43,3 +43,6 @@ class BaseClient:
             timeout=self.timeout,
             **kwargs
         )
+
+    def set_access_token(self, token: str):
+        self.session.headers["x-access-token"] = token

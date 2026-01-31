@@ -47,3 +47,27 @@ class AuthClient(BaseClient):
             }
         )
 
+    def login_with_known_credentials(self, phone: str, password: str):
+        """
+        Логин заранее известного пользователя.
+        Используется для BT и других интеграционных сценариев.
+        """
+        # 1. check_phone
+        resp = self.check_phone(phone)
+        resp.raise_for_status()
+
+        session_id = resp.json()["data"]["session_id"]
+
+        # 2. login
+        login_resp = self.login(
+            session_id=session_id,
+            password=password,
+        )
+        login_resp.raise_for_status()
+
+        # 3. сохраняем token в сессию
+        token = login_resp.json()["data"]["token"]
+        self.set_access_token(token)
+
+        return login_resp
+

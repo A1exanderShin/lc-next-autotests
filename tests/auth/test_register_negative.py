@@ -1,5 +1,6 @@
 import pytest
 from clients.auth_client import AuthClient
+from tests.auth.assertions.common_asserts import assert_client_error
 from utils.phone_factory import generate_phone
 
 
@@ -22,8 +23,8 @@ def test_register_invalid_payload(payload):
     client = AuthClient()
 
     resp = client.post("/auth/register", json=payload)
-    assert resp.status_code in (400, 403)
 
+    assert_client_error(resp)
 
 def test_register_wrong_state():
     client = AuthClient()
@@ -33,8 +34,7 @@ def test_register_wrong_state():
 
     resp = client.register(session_id, "11111111")
 
-    assert resp.status_code == 403
-
+    assert_client_error(resp)
 
 def test_register_reuse_session_id():
     client = AuthClient()
@@ -46,4 +46,4 @@ def test_register_reuse_session_id():
     client.register(session_id, "11111111")
     resp = client.register(session_id, "11111111")
 
-    assert resp.status_code >= 400
+    assert_client_error(resp)

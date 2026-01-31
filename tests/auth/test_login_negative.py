@@ -1,5 +1,6 @@
 import pytest
 from clients.auth_client import AuthClient
+from tests.auth.assertions.common_asserts import assert_client_error
 
 
 @pytest.mark.parametrize(
@@ -35,4 +36,4 @@ def test_login_invalid_credentials():
         }
     )
 
-    assert resp.status_code >= 400
+    assert_client_error(resp)

@@ -1,4 +1,5 @@
 from clients.auth_client import AuthClient
+from tests.auth.assertions.common_asserts import assert_success
 from utils.phone_factory import generate_phone
 from config.settings import settings
 
@@ -14,5 +15,6 @@ def test_register_happy_path():
 
     resp = client.register(session_id, password)
 
-    assert resp.status_code == 200
+    assert_success(resp)
+
     assert "token" in resp.json()["data"]

@@ -1,4 +1,5 @@
 from clients.auth_client import AuthClient
+from tests.auth.assertions.common_asserts import assert_client_error, assert_success
 from utils.phone_factory import generate_phone
 
 
@@ -10,7 +11,8 @@ def test_check_sms_happy_path():
 
     resp = client.check_sms(session_id, 111111)
 
-    assert resp.status_code == 200
+    assert_success(resp)
+
     assert resp.json()["data"]["state"] == "REGISTER"
 
 
@@ -22,4 +24,4 @@ def test_check_sms_invalid_code():
 
     resp = client.check_sms(session_id, 999999)
 
-    assert resp.status_code == 400
+    assert_client_error(resp)

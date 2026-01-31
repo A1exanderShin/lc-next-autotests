@@ -1,5 +1,6 @@
 import pytest
 from clients.auth_client import AuthClient
+from tests.auth.assertions.common_asserts import assert_client_error
 
 
 @pytest.mark.parametrize(
@@ -21,4 +22,5 @@ def test_check_sms_invalid_payload(payload):
     client = AuthClient()
 
     resp = client.post("/auth/check_sms", json=payload)
-    assert resp.status_code in (400, 403)
+
+    assert_client_error(resp)

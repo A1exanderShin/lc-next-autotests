@@ -1,4 +1,5 @@
 from clients.auth_client import AuthClient
+from tests.auth.assertions.common_asserts import assert_success
 from utils.phone_factory import generate_phone
 from config.settings import settings
 
@@ -19,4 +20,4 @@ def test_token_refresh_happy_path():
         refresh_token=reg_data["refresh_token"]
     )
 
-    assert resp.status_code == 200
+    assert_success(resp)

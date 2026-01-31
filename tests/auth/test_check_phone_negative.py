@@ -1,5 +1,6 @@
 import pytest
 from clients.auth_client import AuthClient
+from tests.auth.assertions.common_asserts import assert_client_error
 from utils.phone_factory import generate_phone
 
 
@@ -24,8 +25,8 @@ def test_check_phone_invalid_payload(payload):
     client = AuthClient()
 
     resp = client.post("/auth/check_phone", json=payload)
-    assert resp.status_code == 400
 
+    assert_client_error(resp)
 
 def test_check_phone_rate_limit():
     client = AuthClient()
@@ -34,4 +35,4 @@ def test_check_phone_rate_limit():
     client.check_phone(phone)
     resp = client.check_phone(phone)
 
-    assert resp.status_code >= 400
+    assert_client_error(resp)

@@ -24,3 +24,12 @@ def assert_payout_info(resp):
 
     assert "retention" in data
     assert "delay" in data
+
+def assert_payout_created(resp):
+    body = resp.json()
+
+    assert body["code"] == 200
+    data = body.get("data", {})
+
+    # контракт минимальный и стабильный
+    assert isinstance(data, dict)

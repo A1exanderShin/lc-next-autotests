@@ -59,6 +59,21 @@ class PaymentsClient:
 
         return self.post("/payments/payout/native", json=payload)
 
+    def payout_bt_wallet(self, amount: int):
+        return self.post(
+            "/payments/payout/bt_wallet",
+            json={"amount": amount}
+        )
+
+    def payout(self, amount: int, service_id: int):
+        return self.post(
+            "/payments/payout",
+            json={
+                "amount": amount,
+                "service_id": service_id,
+            }
+        )
+
     def post(self, url: str, json: dict):
         return self.client.post(url, json=json)
 

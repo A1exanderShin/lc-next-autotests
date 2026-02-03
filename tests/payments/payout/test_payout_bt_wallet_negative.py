@@ -5,42 +5,38 @@ from tests.payments.assertions.common_asserts import assert_client_error
 
 
 @pytest.mark.payments
-def test_payout_unauthorized():
+@pytest.mark.bt
+def test_payout_bt_wallet_unauthorized():
     client = PaymentsClient(BaseClient())
 
     resp = client.post(
-        "/payments/payout",
-        json={"amount": 30000, "service_id": 2},
+        "/payments/payout/bt_wallet",
+        json={"amount": 30000},
     )
 
     assert_client_error(resp)
 
 
 @pytest.mark.payments
+@pytest.mark.bt
 @pytest.mark.parametrize(
     "payload",
     [
         {},
-        {"amount": 0, "service_id": 2},
-        {"amount": -100, "service_id": 2},
-        {"amount": "30000", "service_id": 2},
-        {"amount": 30000},              # no service_id
-        {"service_id": 2},              # no amount
+        {"amount": 0},
+        {"amount": -100},
     ],
     ids=[
         "empty_payload",
         "zero_amount",
         "negative_amount",
-        "amount_as_string",
-        "no_service_id",
-        "no_amount",
     ],
 )
-def test_payout_invalid_payload(bt_authorized_client, payload):
+def test_payout_bt_wallet_invalid_amount(bt_authorized_client, payload):
     client = PaymentsClient(bt_authorized_client)
 
     resp = client.post(
-        "/payments/payout",
+        "/payments/payout/bt_wallet",
         json=payload,
     )
 
